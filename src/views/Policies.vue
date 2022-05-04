@@ -1,28 +1,17 @@
 <template>
   <div class="layout max-w-full">
     <div class="data-wrapper flex flex-col max-w-full overflow-x-auto">
-      <div
-        class="flex flex-wrap justify-between gap-2 sm:gap-6 mb-4 sm:flex-nowrap sm:justify-between"
-      >
-        <div class="w-full input-wrapper relative rounded-md">
-          <input
-            v-model="search"
-            placeholder="Filter Policies..."
-            type="text"
-            class="position-absoloute w-full bg-gray-50 pl-10 py-2 outline-none rounded-md border-2 focus:border-blue-400 text-sm"
-          />
-
-          <span class="icon icon-search text-xl text-gray-500 z-10 left-0 absolute ml-3 top-3"></span>
-
-          <span
-            @click="clearSearch"
-            v-if="search"
-            class="icon icon-close text-lg text-gray-500 z-10 right-2 absolute top-3"
-          ></span>
+      <div class="filter-row mb-5">
+        <div class="search-wrapper">
+          <search-input v-model="search" />
         </div>
 
         <div class="toggle-wrapper">
           <toggle v-model="status" />
+        </div>
+
+        <div class="flex justify-end">
+          <custom-select :options="insurance_types" v-model="type" />
         </div>
       </div>
 
@@ -40,6 +29,8 @@ const policies = createNamespacedHelpers("policies");
 import paginator from "@/components/paginator";
 import dataTable from "@/components/data-table";
 import toggle from "@/components/toggle";
+import customSelect from "@/components/custom-select";
+import searchInput from "@/components/search-input";
 export default {
   name: "Test",
 
@@ -47,6 +38,8 @@ export default {
     paginator,
     dataTable,
     toggle,
+    customSelect,
+    searchInput,
   },
 
   computed: {
@@ -72,9 +65,9 @@ export default {
       return this.getPoliciesByPage?.filter((policy) => {
         return (
           this.filterByStatus(policy) &&
+          this.filterByExact(policy) &&
           (this.filterByMatch(policy, "provider") ||
-            this.filterByExact(policy, "policyNumber") ||
-            this.filterByExact(policy, "type"))
+            this.filterByMatch(policy, "policyNumber"))
         );
       });
     },
@@ -90,6 +83,15 @@ export default {
     return {
       status: "all",
       search: "",
+      type: "life",
+      insurance_types: [
+        "life",
+        "travel",
+        "health",
+        "mobile",
+        "vehicle",
+        "home",
+      ],
     };
   },
 
@@ -98,15 +100,15 @@ export default {
 
     filterByMatch(policy, key) {
       // returns true if the search string matches a part of the policy key
-      return policy[key].toLowerCase().includes(this.search.toLowerCase());
+      return `${policy[key]}`.toLowerCase().includes(this.search.toLowerCase());
     },
 
-    filterByExact(policy, value) {
-      return `${policy[value]}`
-        .toLowerCase()
-        .includes(this.search.toLowerCase());
-
-      // return `${policy[value]}`.toLowerCase() === this.search.toLowerCase();
+    filterByExact(policy) {
+      // returns true if the selected type is 'all'
+      // returns true if the insurance type of the policy is exactly the same as the current selected type
+      return this.type === "all"
+        ? true
+        : policy.type.toLowerCase() === this.type.toLowerCase();
     },
 
     filterByStatus(policy) {
@@ -142,11 +144,24 @@ export default {
   height: calc(100vh - 140px);
 }
 
+.filter-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  position: relative;
+}
+
+.search-wrapper {
+  width: calc(100% - 130px);
+}
+
 .toggle-wrapper {
-  /* width: max-content; */
-  width: 450px;
   display: flex;
   align-items: center;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 230px;
+  position: absolute;
 }
 
 @media screen and (max-width: 1100px) {
@@ -158,6 +173,26 @@ export default {
 @media screen and (max-width: 930px) {
   .data-wrapper {
     width: 79%;
+  }
+}
+
+@media screen and (max-width: 880px) {
+  .data-wrapper {
+    width: 81%;
+  }
+
+  .search-wrapper {
+    width: 100%;
+  }
+
+  .toggle-wrapper {
+    position: relative;
+    margin-top: 20px;
+    grid-column: 1 / -1;
+    order: 3;
+  }
+  .filter-row {
+    grid-template-columns: 1fr 1fr;
   }
 }
 
@@ -176,6 +211,12 @@ export default {
 @media screen and (max-width: 400px) {
   .data-wrapper {
     width: 97%;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .filter-row {
+    grid-template-columns: 3fr 2fr;
   }
 }
 </style>

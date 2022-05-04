@@ -3,24 +3,12 @@
     class="w-full px-2 py-2 rounded-3xl cursor-pointer transition-colors duration-200 flex relative"
     :class="getBg"
   >
-    <div
-      class="text-center w-1/3 text-sm font-semibold z-10"
-      @click="toggleState('all')"
-    >
-      All
-    </div>
-    <div
-      class="text-center w-1/3 text-sm font-semibold z-10"
-      @click="toggleState('active')"
-    >
-      Active
-    </div>
+    <div class="text-center w-1/3 text-sm font-semibold z-10" @click="toggleState('all')">All</div>
+    <div class="text-center w-1/3 text-sm font-semibold z-10" @click="toggleState('active')">Active</div>
     <div
       class="text-center w-1/3 text-sm font-semibold z-10"
       @click="toggleState('inactive')"
-    >
-      InActive
-    </div>
+    >InActive</div>
 
     <div
       class="left-1 top-1 bg-white h-7 w-1/3 rounded-full absolute transition-position duration-300"
