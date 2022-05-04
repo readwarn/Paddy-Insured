@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white shadow-inner z-20 max-w-full">
+  <div class="bg-white shadow-inner z-20 max-w-full paginator">
     <div
       class="bg-blue-500 h-1 transition-sizing duration-100"
       :style="{ width: `${getPageProgress}%` }"
@@ -10,12 +10,9 @@
     >
       <span
         class="text-sm xl:text-md font-bold mb-3 text-black w-full xs:w-auto xs:mb-0"
-        >Page {{ currentPage }}/{{ page_count }}</span
-      >
+      >Page {{ currentPage }}/{{ page_count }}</span>
 
-      <div
-        class="flex justify-center xs:justify-start w-full xs:w-auto items-center space-x-2 "
-      >
+      <div class="flex justify-center xs:justify-start w-full xs:w-auto items-center space-x-2">
         <router-link
           custom
           v-slot="{ navigate }"
@@ -50,9 +47,7 @@
               !isActive && 'border-gray-300 ',
             ]"
             class="font-medium border-2 px-3 h-8 text-sm flex items-center rounded-md transition-colors hover:border-gray-600"
-          >
-            {{ page }}
-          </button>
+          >{{ page }}</button>
         </router-link>
 
         <router-link
@@ -66,7 +61,7 @@
           <button
             @click="navigate"
             :disabled="isNextDisabled"
-            class="group inline-flex items-center border-2 border-gray-300 rounded-md px-1  h-8 transition-colors hover:border-gray-600 disabled:border-gray-300"
+            class="group inline-flex items-center border-2 border-gray-300 rounded-md px-1 h-8 transition-colors hover:border-gray-600 disabled:border-gray-300"
           >
             <span
               class="icon icon-caret-right text-2xl"
@@ -200,7 +195,10 @@ export default {
 </script>
 
 <style scoped>
-.initial_progress {
-  width: 0%;
+.paginator {
+  position: fixed;
+  width: 100%;
+  top: 100vh;
+  transform: translateY(-100%);
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="layout relative" v-if="getDetailedPolicy">
+  <div class="layou relative h-screen" v-if="getDetailedPolicy">
     <button
       @click="goBack"
       class="rounded-3xl sm:py-0.5 px-3 sm:px-5 border-2 border-gray-600 fixed left-5 :sm:left-10 top-10 sm:top-30 transition-colors mt-8 hover:border-blue-300 hover:text-gray-500"
@@ -18,7 +18,7 @@
 
       <p class="mb-6 text-gray-700">{{getDetailedPolicy.policyNumber}}</p>
 
-      <img class="w-64 h-64 mx-auto w64" :src="getInsuranceImage" alt />
+      <img class="w-48 h-48 mx-auto" :src="getInsuranceImage" alt />
 
       <p class="text-gray-700">{{ getDetailedPolicy.isActive ? 'Active':'Inactive'}}</p>
 
@@ -94,9 +94,6 @@ export default {
 </script>
 
 <style scoped>
-.layout {
-  height: calc(100vh - 60px);
-}
 .state-icon {
   left: calc(100% - 30px);
   top: 10px;

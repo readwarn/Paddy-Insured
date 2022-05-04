@@ -2,16 +2,21 @@
   <div
     @click="toggleOptions"
     v-on-clickaway="closeOptions"
-    class="rounded-md pl-3 py-2 flex items-center justify-between relative border border-gray-400 hover:border-blue-400 cursor-pointer"
+    class="rounded-md pl-3 py-2 flex items-center justify-between relative border-2 border-gray-300 hover:border-blue-400 cursor-pointer"
     :class="[show_options && 'border-blue-400']"
   >
     <div class="mr-1 font-semibold -mt-1 flex items-center capitalize">
-      <p class="text-type">{{selection}} Insurance</p>
+      <p class="text-type">
+        {{selection}}
+        <span class="hidden xs:inline-block">Insurance</span>
+      </p>
+
       <span
         :class="[show_options && 'rotate-icon']"
         class="icon icon-caret-right top-0.5 text-xl relative block ml-2 transition-transform duration-300"
       ></span>
     </div>
+
     <div
       class="h-48 p-3 bg-white absolute top-full rounded-md mt-1 right-0.5 shadow-md options cursor-pointer"
       v-if="show_options"
@@ -37,6 +42,7 @@
             name="type"
             value="all"
             id="_all_"
+            class="peer"
           />
           <label
             class="text-sm w-full mb-0.5 cursor-pointer capitalize text-gray-700"
@@ -56,9 +62,10 @@
             name="type"
             :value="option"
             :id="option+index"
+            class="peer"
           />
           <label
-            class="text-sm w-full mb-0.5 cursor-pointer capitalize text-gray-700"
+            class="text-sm w-full mb-0.5 cursor-pointer capitalize text-gray-700 peer"
             :for="option+index"
           >{{option}}</label>
         </div>
@@ -70,6 +77,7 @@
           src="https://img.freepik.com/free-vector/hand-holding-empty-wallet-with-coin-web-spider-inside-financial-problem-cartoon-illustration-vector_201904-407.jpg?w=740"
           alt="empty"
         />
+
         <p class="text-sm mt-2 text-gray-500">No Match Found!!!</p>
       </div>
     </div>
@@ -169,6 +177,11 @@ export default {
 .empty-state img {
   width: 75px;
   height: 75px;
+}
+
+.peer:checked + label {
+  color: #111827;
+  font-weight: 600;
 }
 
 @media screen and (min-width: 400px) {

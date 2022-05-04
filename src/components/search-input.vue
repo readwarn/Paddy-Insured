@@ -1,11 +1,11 @@
 <template>
-  <div class="w-full input-wrapper relative rounded-md">
+  <div class="w-full input-wrapper relative rounded-md border-2">
     <input
       v-model="search"
       @input="$emit('input',search)"
       placeholder="Filter Policies..."
       type="text"
-      class="position-absoloute w-full bg-gray-50 pl-10 py-2 outline-none rounded-md border-2 focus:border-blue-400 text-sm"
+      class="position-absoloute w-full bg-gray-50 pl-10 py-2 outline-none rounded-md border-2 border-gray-300 focus:border-blue-400 text-sm"
     />
 
     <span class="icon icon-search text-xl text-gray-500 z-10 left-0 absolute ml-3 top-3"></span>
