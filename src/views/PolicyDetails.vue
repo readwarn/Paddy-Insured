@@ -5,13 +5,15 @@
   >
     <button
       @click="goBack"
-      class="back-button mb-5 border-2 bg-blue-200 border-gray-400 flex items-center pr-4 pl-1 py-1 rounded-3xl hover:border-transparent group hover:bg-blue-400 transition fixed z-10"
+      class="mb-5 border-2 bg-blue-200 border-gray-400 flex items-center pr-4 pl-1 py-1 rounded-3xl hover:border-transparent group hover:bg-blue-400 transition fixed z-10"
     >
       <span class="icon icon-caret-left text-2xl mt-1 text-gray-600 group-hover:text-white"></span>
       <span class="text-sm text-gray-600 group-hover:text-white">Back</span>
     </button>
 
-    <div class="relative top-8 pb-14 sm:pb-0 w-full">
+    <div></div>
+
+    <div class="top-12 relative pb-14 sm:pb-0 w-full">
       <div class="photos-gallery mx-auto">
         <div
           class="shadow-md border-2 rounded-md"
@@ -136,14 +138,6 @@ export default {
 .photos-gallery div:nth-child(3) {
   grid-column: 2 / span 1;
   grid-row: 2 / span 1;
-}
-
-.back-button {
-  inset: 0;
-  top: 70px;
-  left: 40px;
-  height: 40px;
-  padding: 10px 20px 10px 10px;
 }
 
 @media screen and (max-width: 435px) {
