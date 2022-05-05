@@ -1,36 +1,57 @@
 <template>
-  <div class="layou relative h-screen" v-if="getDetailedPolicy">
+  <div
+    class="details-layout py-0.5 px-4 mx-auto w-full xl:w-7/12 xl:max-w-3xl lg:w-8/12 lg:max-w-2xl md:w-11/12 md:max-w-xl sm:w-11/12 sm:w-max-xl relative -top-15"
+    v-if="getDetailedPolicy"
+  >
     <button
       @click="goBack"
-      class="rounded-3xl sm:py-0.5 px-3 sm:px-5 border-2 border-gray-600 fixed left-5 :sm:left-10 top-10 sm:top-30 transition-colors mt-8 hover:border-blue-300 hover:text-gray-500"
+      class="mb-5 border-2 bg-blue-200 border-gray-400 flex items-center pr-4 pl-1 py-1 rounded-3xl hover:border-transparent group hover:bg-blue-400 transition fixed z-10"
     >
-      <span class="icon icon-caret-left text-2xl relative top-0.5"></span>
-
-      <span class="relative -top-1">Back</span>
+      <span class="icon icon-caret-left text-2xl mt-1 text-gray-600 group-hover:text-white"></span>
+      <span class="text-sm text-gray-600 group-hover:text-white">Back</span>
     </button>
 
-    <div
-      class="bg-white rounded-lg p-3 sm:p-5 w-11/12 sm:w-9/12 md:w-8/12 mx-auto grid place-items-center top-16 sm:top-18 relative"
-    >
-      <h2 class="font-2xl font-bold mb-1 text-center">{{getDetailedPolicy.provider}}</h2>
+    <div></div>
 
-      <p class="mb-1 text-gray-700">{{getDetailedPolicy.type}} Insurance</p>
+    <div class="top-12 relative pb-14 sm:pb-0 w-full">
+      <div class="photos-gallery mx-auto">
+        <div
+          class="shadow-md border-2 rounded-md"
+          :class="[getDetailedPolicy.isActive && 'border-green-500',!getDetailedPolicy.isActive && 'border-red-400']"
+          v-for="(image,index) in getTypeImages"
+          :key="index"
+        >
+          <img :src="image" alt="insured-image" />
+        </div>
+      </div>
 
-      <p class="mb-6 text-gray-700">{{getDetailedPolicy.policyNumber}}</p>
+      <h3 class="mt-6 text-3xl font-bold">{{getDetailedPolicy.type}} Insurance</h3>
 
-      <img class="w-48 h-48 mx-auto" :src="getInsuranceImage" alt />
+      <p class="text-md text-gray-600 mb-5">
+        by
+        <span class="font-semibold">{{getDetailedPolicy.provider}}</span>
+      </p>
 
-      <p class="text-gray-700">{{ getDetailedPolicy.isActive ? 'Active':'Inactive'}}</p>
+      <div class="flex items-center gap-x-2 mb-3">
+        <p class="text-md text-gray-800 w-28 xs:w-32">Status</p>
+        <div class="bg-gray-600 h-0.5 top-0.5 relative w-48 xs:w-52 mr-2"></div>
+        <p
+          class="font-semibold"
+          :class="[getDetailedPolicy.isActive && 'text-green-500',!getDetailedPolicy.isActive && 'text-red-500']"
+        >{{getDetailedPolicy.isActive ? 'Active':'Inactive'}}</p>
+      </div>
 
-      <span
-        class="icon text-2xl xs:text-4xl state-icon"
-        :class="[getDetailedPolicy.isActive && 'icon-published text-green-400',!getDetailedPolicy.isActive && 'icon-unpublished text-red-400']"
-      ></span>
+      <div class="flex items-center gap-x-2">
+        <p class="text-md text-gray-800 w-28 xs:w-32">Policy Number</p>
+        <div class="bg-gray-600 h-0.5 top-0.5 relative w-48 xs:w-52 mr-2"></div>
+        <p class="font-semibold">{{getDetailedPolicy.policyNumber}}</p>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import types from "@/store/insurance-types";
 import { createNamespacedHelpers } from "vuex";
 const policies = createNamespacedHelpers("policies");
 export default {
@@ -39,8 +60,14 @@ export default {
   computed: {
     ...policies.mapGetters(["getDetailedPolicy", "getPolicies"]),
 
-    getInsuranceImage() {
-      return this.insurance_types[this.getDetailedPolicy.type?.toLowerCase()];
+    getTypes() {
+      // A JSON data of image list for each type of insurance
+      return types;
+    },
+
+    getTypeImages() {
+      // list of three images based on insurance type
+      return this.getTypes[this.getDetailedPolicy.type.toLowerCase()];
     },
   },
 
@@ -56,25 +83,6 @@ export default {
       },
       immediate: true,
     },
-  },
-
-  data() {
-    return {
-      //image for each insurance type
-      insurance_types: {
-        life: "https://img.freepik.com/free-vector/person-doing-exercise-around-heart-online-fitness-concept_24908-58987.jpg?t=st=1651618030~exp=1651618630~hmac=e13f1db2e24e49f761f03b024602fde9d581cf38bf7653f7c19bc05180d3daf9&w=740",
-        travel:
-          "https://img.freepik.com/free-vector/vacation-holidays-background-with-realistic-globe-suitcase-photo-camera_1284-10476.jpg?t=st=1651612546~exp=1651613146~hmac=320c1bd899223e7a5929e82066ef6bfd3f34dd5ff3eeb490810bc83676b01857&w=740",
-        health:
-          "https://img.freepik.com/free-vector/doctor-concept-illustration_114360-1072.jpg?t=st=1651618428~exp=1651619028~hmac=86d55fab1e17153ed63ae423b4b48a39f0ef0884dc75c45147433df1c7deeca9&w=740",
-        mobile:
-          "https://img.freepik.com/free-vector/digital-device-mockup-set_53876-89347.jpg?t=st=1651618502~exp=1651619102~hmac=1439171aba170b2d2e50d7bafcd999f6bb98d997e54e44f902c699db25c2f9b2&w=740",
-        vehicle:
-          "https://img.freepik.com/free-vector/old-red-truck-white-background_1308-105948.jpg?t=st=1651618532~exp=1651619132~hmac=57ad04c4e60db0e797c0347dbe7c5174c9d7fb12eba8c8aa3f91be10c35f7438&w=996",
-
-        home: "https://img.freepik.com/free-vector/inspiration-big-house-vector-design_638353-14.jpg?w=740",
-      },
-    };
   },
 
   methods: {
@@ -94,17 +102,62 @@ export default {
 </script>
 
 <style scoped>
-.state-icon {
-  left: calc(100% - 30px);
-  top: 10px;
-  position: absolute;
+.photos-gallery {
+  display: grid;
+  grid-template-columns: 5.5fr 4.5fr;
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  gap: 15px;
+  place-items: center;
+  width: 100%;
+  height: 260px;
+  margin: auto;
 }
 
-@media screen and (min-width: 400px) {
-  .state-icon {
-    left: calc(100% - 50px);
-    top: 10px;
-    position: absolute;
+.photos-gallery div {
+  width: 100%;
+  height: 100%;
+}
+
+.photos-gallery div img {
+  object-fit: cover;
+  max-width: 100%;
+  width: 100%;
+  height: 100%;
+  max-height: 100%;
+  border-radius: inherit;
+}
+
+.photos-gallery div:nth-child(1) {
+  grid-column: 1 / span 1;
+  grid-row: 1 / span 2;
+}
+.photos-gallery div:nth-child(2) {
+  grid-column: 2 / span 1;
+  grid-row: 1 / span 1;
+}
+.photos-gallery div:nth-child(3) {
+  grid-column: 2 / span 1;
+  grid-row: 2 / span 1;
+}
+
+@media screen and (max-width: 435px) {
+  .photos-gallery {
+    grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
+    height: 325px;
+  }
+
+  .photos-gallery div:nth-child(1) {
+    grid-column: auto;
+    grid-row: auto;
+  }
+
+  .photos-gallery div:nth-child(2) {
+    grid-column: auto;
+    grid-row: auto;
+  }
+
+  .photos-gallery div:nth-child(3) {
+    display: none;
   }
 }
 </style>

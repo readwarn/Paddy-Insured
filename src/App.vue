@@ -1,7 +1,11 @@
 <template>
-  <div id="app" class="bg-gray-200 min-h-screen pb-30">
+  <div id="app">
     <router-view />
   </div>
 </template>
 
-<style></style>
+<style>
+body {
+  background: #e5e7eb;
+}
+</style>

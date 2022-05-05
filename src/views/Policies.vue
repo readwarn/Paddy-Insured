@@ -133,14 +133,18 @@ export default {
 
 <style scoped>
 .layout {
-  height: calc(100% - 70px);
+  height: calc(100% - 55px);
+  width: 100%;
+  top: 70px;
   padding-bottom: 15px;
+  position: fixed;
+  left: 0px;
 }
 
 .data-wrapper {
   width: 60%;
   margin: auto;
-  height: 100%;
+  height: calc(100% - 70px);
 }
 
 .filter-row {
@@ -211,9 +215,10 @@ export default {
   .data-wrapper {
     width: 97%;
   }
+
   .layout {
-    height: calc(100% - 65px);
-    top: 15px;
+    height: calc(100% - 55px);
+    top: 70px;
   }
 }
 

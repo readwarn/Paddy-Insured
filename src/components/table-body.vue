@@ -76,4 +76,10 @@ export default {
     grid-template-columns: 110px minmax(310px, 1fr) 110px 100px;
   }
 }
+
+@media screen and (max-width: 435px) {
+  .table-columns {
+    grid-template-columns: 90px minmax(235px, 1fr) 110px 100px;
+  }
+}
 </style>

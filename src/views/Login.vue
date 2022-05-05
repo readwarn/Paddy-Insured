@@ -39,7 +39,6 @@ export default {
   watch: {
     getUsername: {
       handler(name) {
-        console.log("username gotten");
         this.username = name;
       },
       immediate: true,
