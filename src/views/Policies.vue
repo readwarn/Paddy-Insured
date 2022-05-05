@@ -1,5 +1,5 @@
 <template>
-  <div class="layout relative">
+  <div class="layout relative overflow-y-hidden">
     <div class="data-wrapper flex flex-col max-w-full overflow-x-auto">
       <div class="filter-row mb-5">
         <div class="search-wrapper">
@@ -133,16 +133,14 @@ export default {
 
 <style scoped>
 .layout {
-  display: grid;
-  height: calc(100vh - 60px);
-  grid-template-rows: 1fr auto;
-  top: 35px;
+  height: calc(100% - 70px);
+  padding-bottom: 15px;
 }
 
 .data-wrapper {
   width: 60%;
   margin: auto;
-  height: calc(100vh - 170px);
+  height: 100%;
 }
 
 .filter-row {
@@ -209,12 +207,12 @@ export default {
   }
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 450px) {
   .data-wrapper {
     width: 97%;
   }
   .layout {
-    height: calc(100vh - 60px);
+    height: calc(100% - 65px);
     top: 15px;
   }
 }

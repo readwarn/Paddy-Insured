@@ -42,10 +42,10 @@
             name="type"
             value="all"
             id="_all_"
-            class="peer"
+            class="peer w-4 h-4"
           />
           <label
-            class="text-sm w-full mb-0.5 cursor-pointer capitalize text-gray-700"
+            class="text-sm p-0.5 w-full mb-0.5 cursor-pointer capitalize text-gray-700"
             for="_all_"
           >All</label>
         </div>
@@ -62,10 +62,10 @@
             name="type"
             :value="option"
             :id="option+index"
-            class="peer"
+            class="peer w-4 h-4"
           />
           <label
-            class="text-sm w-full mb-0.5 cursor-pointer capitalize text-gray-700 peer"
+            class="text-sm p-0.5 w-full mb-0.5 cursor-pointer capitalize text-gray-700 peer"
             :for="option+index"
           >{{option}}</label>
         </div>

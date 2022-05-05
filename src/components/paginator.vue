@@ -6,10 +6,10 @@
     ></div>
 
     <div
-      class="text-center xs:text-left px-3 xs:px-10 md:px-24 xl:px-36 py-3 flex flex-wrap items-center justify-between space-x-15"
+      class="text-center px-2 xs:px-10 md:px-24 xl:px-36 py-3 flex flex-wrap items-center justify-between space-x-15"
     >
       <span
-        class="text-sm xl:text-md font-bold mb-3 text-black w-full xs:w-auto xs:mb-0"
+        class="hidden xs:inline-block text-sm xs:text-md font-bold text-black"
       >Page {{ currentPage }}/{{ page_count }}</span>
 
       <div class="flex justify-center xs:justify-start w-full xs:w-auto items-center space-x-2">
@@ -198,7 +198,7 @@ export default {
 .paginator {
   position: fixed;
   width: 100%;
-  top: 100vh;
+  top: 100%;
   transform: translateY(-100%);
 }
 </style>

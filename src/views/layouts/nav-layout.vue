@@ -1,5 +1,5 @@
 <template>
-  <div class="nav-layout">
+  <div class="nav-layout pb-30">
     <div
       class="z-30 text-center bg-white border p-3 md:py-3 md:px-16 grid grid-cols-2 items-center fixed w-full top-0 left-0"
     >
@@ -33,4 +33,17 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.nav-layout {
+  position: relative;
+  top: 55px;
+  height: calc(100vh - 60px);
+}
+
+@media screen and (min-width: 430px) {
+  .nav-layout {
+    top: 70px;
+    height: calc(100vh - 70px);
+  }
+}
+</style>

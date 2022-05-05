@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-white table-wrapper border-gray-400 border-2 rounded-lg max-w-full overflow-x-auto"
+    class="bg-white h-full table-wrapper border-gray-400 border-2 rounded-lg max-w-full overflow-x-auto"
   >
     <template>
       <table-header :table_headers="table_headers" />
